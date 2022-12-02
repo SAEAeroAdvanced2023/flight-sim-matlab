@@ -1,0 +1,33 @@
+% PADA Plant Model
+
+m = 1; % Mass of aircraft [kg]
+g = 9.81; % Gravitational acceleration [m/s^2]
+
+% Stability & Control derivatives
+% Lift
+C_L0 = 0;
+C_Lalpha = 0;
+C_Lde = 0;
+
+% Drag
+C_D0 = 0;
+C_Dalpha = 0;
+C_Dde = 0;
+
+% Side force
+C_y0 = 1;
+C_yalpha = 1;
+C_yda = 1;
+
+% 
+C_l0 = 0;
+C_lalpha = 1;
+C_lda = 1;
+
+C_m0 = 1;
+C_malpha = 1;
+C_mde = 1;
+
+C_n0 = 1;
+C_nalpha = 1;
+C_nda = 1;
