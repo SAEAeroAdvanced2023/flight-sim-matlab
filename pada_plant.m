@@ -13,6 +13,7 @@ k_motor = 1;
 Ref_area = 1;
 Ref_span = 1;
 Ref_length = 1;
+Ref_chord = 1;
 
 % Stability & Control derivatives
 % Lift
