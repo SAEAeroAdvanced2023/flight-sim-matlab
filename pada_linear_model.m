@@ -116,3 +116,20 @@ B_lon = [X_de,  X_dt;
          M_de,  0;
          0,     0;
          0,     0]
+
+% ---------------------
+% LQR Controller Design
+% ---------------------
+
+% Laterial controller
+Q_lat = eye(5);
+R_lat = 5000; % Temp variable
+
+[K_lat, S_lat, P_lat] = lqr(A_lat, B_lat, Q_lat, R_lat);
+
+% Longitudinal controller
+Q_lon = eye(5);
+R_lon = [5, 0; 0, 0.1]; % Temp variables
+
+[K_lon, S_lon, P_lon] = lqr(A_lon, B_lon, Q_lon, R_lon);
+

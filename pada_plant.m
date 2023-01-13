@@ -19,4 +19,4 @@ Ref_chord = 1;
 J_x = 1;
 J_y = 1;
 J_z = 1;
-J_xz = 1;
+J_xz = 0.1;

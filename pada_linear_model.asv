@@ -61,11 +61,15 @@ N_da = (rho*Va_0*Va_0*Ref_area*Ref_span*C_rda/2);
 
 A_lat = [Y_v,                   Y_p/(Va_0*cos(beta_0)), Y_r/(Va_0*cos(beta_0)),     (g*cos(theta_0)*cos(phi_0)/(Va_0*cos(beta_0))),             0;
          L_v*Va_0*cos(beta_0),  L_p,                    L_r,                        0,                                                          0;
-         N_v*Va_0*cos(beta_0),  N_p,                    N_r,                        0, 0;
+         N_v*Va_0*cos(beta_0),  N_p,                    N_r,                        0,                                                          0;
          0,                     1,                      cos(phi_0)*tan(theta_0),    q_0*cos(phi_0)*tan(theta_0) - r_0*sin(phi_0)*tan(theta_0),  0;
          0,                     0,                      cos(phi_0)*sec(theta_0),    p_0*cos(phi_0)*sec(theta_0) - r_0*sin(phi_0)*sec(theta_0),  0]
 
-B_lat = [Y_da/(Va_0*cos(beta_0)); L_da; N_da; 0; 0]
+B_lat = [Y_da/(Va_0*cos(beta_0)); 
+         L_da; 
+         N_da; 
+         0; 
+         0]
 
 
 % ------------------------------
@@ -107,8 +111,25 @@ A_lon = [X_u,          X_w,           X_q + w_0, -g*cos(theta_0),               
          0,            0,             1,         0,                                     0;
          sin(theta_0), -cos(theta_0), 0,         (u_0*cos(theta_0) + w_0*sin(theta_0)), 0]
 
-B_lon = [X_de, X_dt;
-         Z_de, 0;
-         M_de, 0;
-         0, 0;
-         0, 0]
+B_lon = [X_de,  X_dt;
+         Z_de,  0;
+         M_de,  0;
+         0,     0;
+         0,     0]
+
+% ---------------------
+% LQR Controller Design
+% ---------------------
+
+% Laterial controller
+Q_lat = 0;
+R_lat = 0;
+
+[K_lat, S_lat, P_lat] = lqr(A_lat, B_lat, Q_lat, R_lat);
+
+% Longitudinal controller
+Q_lat = 0;
+R_lat = 0;
+
+[K_lat, S_lat, P_lat] = lqr(A_lat, B_lat, Q_lat, R_lat);
+
