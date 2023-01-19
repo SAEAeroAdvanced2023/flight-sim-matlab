@@ -11,7 +11,7 @@ run("pada_aero_coefficients.m");
 % Trim conditions for linearization
 % ---------------------------------
 
-u_0 = 9.0; % Velocity in body x-axis
+u_0 = 10.0; % Velocity in body x-axis
 v_0 = 0; % Velocity in body y-axis
 w_0 = 1.0; % Velocity in body z-axis
 Va_0 = sqrt(u_0^2 + w_0^2 + v_0^2); % Airspeed 40ft/s 50up200side
@@ -24,9 +24,9 @@ de_0 = 0; % Elevator deflection de=5deg
 da_0 = 0; % Aileron deflection da=0
 dt_0 = 0.5; % Throttle deflection
 
-theta_0 = -0.175; % Pitch angle theta=aoa=7deg
+theta_0 = 0.01; % Pitch angle theta=aoa=7deg
 phi_0 = 0; % Roll angle
-alpha_0 = 0.12; % Angle of attack aoa=7deg
+alpha_0 = 0.01; % Angle of attack aoa=7deg
 beta_0 = 0; % Sideslip angle
 
 % elevon max deflection: 25 deg
