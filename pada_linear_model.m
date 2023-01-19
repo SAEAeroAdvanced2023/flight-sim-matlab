@@ -82,7 +82,7 @@ beta_0 = 0; % Sideslip angle
 % Force coefficients in body X-axis
 C_X0 = -C_D0*cos(alpha_0) + C_L0*sin(alpha_0);
 C_Xalpha = -C_Dalpha*cos(alpha_0) + C_Lalpha*sin(alpha_0);
-C_Xde = -C_Dde*cos(alpha_0) + C_Lde*sin(alpha_0);
+C_Xde = C_Xde; %-C_Dde*cos(alpha_0) + C_Lde*sin(alpha_0);
 C_Xq = -C_Dq*cos(alpha_0) + C_Lq*sin(alpha_0);
 % State coefficients for delta u
 du_u = (u_0*rho*Ref_area/m)*(C_X0 + C_Xalpha*alpha_0 + C_Xde*de_0) - (rho*Ref_area*w_0*C_Xalpha/(2*m)) + (rho*Ref_area*Ref_chord*C_Xq*u_0*q_0/(4*m*Va_0)) - (rho*S_prop*u_0/m);
@@ -100,7 +100,7 @@ du_dt = rho*S_prop*k_motor*k_motor*dt_0/m;
 % Force coefficients in body Z-axis
 C_Z0 = -C_D0*sin(alpha_0) - C_L0*cos(alpha_0);
 C_Zalpha = -C_Dalpha*sin(alpha_0) - C_Lalpha*cos(alpha_0);
-C_Zde = -C_Dde*sin(alpha_0) - C_Lde*cos(alpha_0);
+C_Zde = C_Zde; %-C_Dde*sin(alpha_0) - C_Lde*cos(alpha_0);
 C_Zq = -C_Dq*sin(alpha_0) - C_Lq*cos(alpha_0);
 % State coefficients for delta w
 dw_u = q_0 + (u_0*rho*Ref_area/m)*(C_Z0 + C_Zalpha*alpha_0 + C_Zde*de_0) - (rho*Ref_area*C_Zalpha*w_0/(2*m)) + (u_0*rho*Ref_area*C_Zq*Ref_chord*q_0/(4*m*Va_0));
