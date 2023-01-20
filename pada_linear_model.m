@@ -10,7 +10,6 @@ run("pada_aero_coefficients.m");
 % ---------------------------------
 % Trim conditions for linearization
 % ---------------------------------
-
 u_0 = 10.0; % Velocity in body x-axis
 v_0 = 0; % Velocity in body y-axis
 w_0 = 1.0; % Velocity in body z-axis
@@ -145,7 +144,10 @@ B_lon = [du_de,     du_dt;
 % [K_lat, S_lat, P_lat] = lqr(A_lat, B_lat, Q_lat, R_lat);
 
 % Longitudinal controller
-Q_lon = eye(4);
+Q_lon = [1, 0, 0, 0;
+         0, 1, 0, 0;
+         0, 0, 100, 0;
+         0, 0, 0, 10];
 R_lon = [0.1, 0; 0, 0.1]; % Temp variables
 
 [K_lon, S_lon, P_lon] = lqr(A_lon, B_lon, Q_lon, R_lon);
