@@ -10,8 +10,7 @@ run("pada_aero_coefficients.m");
 % ---------------------------------
 % Trim conditions for linearization
 % ---------------------------------
-
-u_0 = 9.0; % Velocity in body x-axis
+u_0 = 10.0; % Velocity in body x-axis
 v_0 = 0; % Velocity in body y-axis
 w_0 = 1.0; % Velocity in body z-axis
 Va_0 = sqrt(u_0^2 + w_0^2 + v_0^2); % Airspeed 40ft/s 50up200side
@@ -24,9 +23,9 @@ de_0 = 0; % Elevator deflection de=5deg
 da_0 = 0; % Aileron deflection da=0
 dt_0 = 0.5; % Throttle deflection
 
-theta_0 = -0.175; % Pitch angle theta=aoa=7deg
+theta_0 = 0.01; % Pitch angle theta=aoa=7deg
 phi_0 = 0; % Roll angle
-alpha_0 = 0.12; % Angle of attack aoa=7deg
+alpha_0 = 0.01; % Angle of attack aoa=7deg
 beta_0 = 0; % Sideslip angle
 
 % elevon max deflection: 25 deg
@@ -82,7 +81,7 @@ beta_0 = 0; % Sideslip angle
 % Force coefficients in body X-axis
 C_X0 = -C_D0*cos(alpha_0) + C_L0*sin(alpha_0);
 C_Xalpha = -C_Dalpha*cos(alpha_0) + C_Lalpha*sin(alpha_0);
-C_Xde = -0.00834; %Updated Jan19 10:30am    %-C_Dde*cos(alpha_0) + C_Lde*sin(alpha_0);
+C_Xde = C_Xde; %-C_Dde*cos(alpha_0) + C_Lde*sin(alpha_0);
 C_Xq = -C_Dq*cos(alpha_0) + C_Lq*sin(alpha_0);
 % State coefficients for delta u
 du_u = (u_0*rho*Ref_area/m)*(C_X0 + C_Xalpha*alpha_0 + C_Xde*de_0) - (rho*Ref_area*w_0*C_Xalpha/(2*m)) + (rho*Ref_area*Ref_chord*C_Xq*u_0*q_0/(4*m*Va_0)) - (rho*S_prop*u_0/m);
@@ -100,7 +99,7 @@ du_dt = rho*S_prop*k_motor*k_motor*dt_0/m;
 % Force coefficients in body Z-axis
 C_Z0 = -C_D0*sin(alpha_0) - C_L0*cos(alpha_0);
 C_Zalpha = -C_Dalpha*sin(alpha_0) - C_Lalpha*cos(alpha_0);
-C_Zde = -C_Zde; % Updated Jan19 10:30am   %-C_Dde*sin(alpha_0) - C_Lde*cos(alpha_0);
+C_Zde = C_Zde; %-C_Dde*sin(alpha_0) - C_Lde*cos(alpha_0);
 C_Zq = -C_Dq*sin(alpha_0) - C_Lq*cos(alpha_0);
 % State coefficients for delta w
 dw_u = q_0 + (u_0*rho*Ref_area/m)*(C_Z0 + C_Zalpha*alpha_0 + C_Zde*de_0) - (rho*Ref_area*C_Zalpha*w_0/(2*m)) + (u_0*rho*Ref_area*C_Zq*Ref_chord*q_0/(4*m*Va_0));
@@ -134,6 +133,12 @@ B_lon = [du_de,     du_dt;
          0,         0]
 
 
+% [num, den] = ss2tf(A_lon, B_lon, eye(4), zeros(4,2),1);
+% tf_u_de = tf(num(1,:), den);
+% tf_w_de = tf(num(2,:), den);
+% tf_q_de = tf(num(3,:), den);
+% tf_theta_de = tf(num(4,:), den);
+
 % ---------------------
 % LQR Controller Design
 % ---------------------
@@ -145,8 +150,11 @@ B_lon = [du_de,     du_dt;
 % [K_lat, S_lat, P_lat] = lqr(A_lat, B_lat, Q_lat, R_lat);
 
 % Longitudinal controller
-Q_lon = eye(4);
-R_lon = [0.1, 0; 0, 0.1]; % Temp variables
+Q_lon = [1, 0, 0, 0;
+         0, 1, 0, 0;
+         0, 0, 100, 0;
+         0, 0, 0, 10];
+R_lon = [0.01, 0; 0, 0.01]; % Temp variables
 
 [K_lon, S_lon, P_lon] = lqr(A_lon, B_lon, Q_lon, R_lon);
 

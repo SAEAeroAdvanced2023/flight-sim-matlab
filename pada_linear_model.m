@@ -133,6 +133,12 @@ B_lon = [du_de,     du_dt;
          0,         0]
 
 
+% [num, den] = ss2tf(A_lon, B_lon, eye(4), zeros(4,2),1);
+% tf_u_de = tf(num(1,:), den);
+% tf_w_de = tf(num(2,:), den);
+% tf_q_de = tf(num(3,:), den);
+% tf_theta_de = tf(num(4,:), den);
+
 % ---------------------
 % LQR Controller Design
 % ---------------------
@@ -148,7 +154,7 @@ Q_lon = [1, 0, 0, 0;
          0, 1, 0, 0;
          0, 0, 100, 0;
          0, 0, 0, 10];
-R_lon = [0.1, 0; 0, 0.1]; % Temp variables
+R_lon = [0.01, 0; 0, 0.01]; % Temp variables
 
 [K_lon, S_lon, P_lon] = lqr(A_lon, B_lon, Q_lon, R_lon);
 
