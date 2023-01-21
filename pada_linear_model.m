@@ -108,7 +108,7 @@ dw_q = u_0 + (rho*Va_0*Ref_area*C_Zq*Ref_chord/(4*m));
 dw_theta = -g*sin(theta_0);
 dw_de = rho*Va_0*Va_0*Ref_area*C_Zde/(2*m);
 % Z_u = q_0 + (u_0*rho*Ref_area/m)*(C_Z0 + C_Zalpha*alpha_0 + C_Zde*de_0) - (rho*Ref_area*C_Zalpha*w_0/(2*m)) + (u_0*rho*Ref_area*C_Zq*Ref_chord*q_0/(4*m*Va_0));
-% Z_w = (w_0*rho*Ref_area/m)*(C_Z0 + C_Zalpha*alpha_0 + C_Zde*de_0) + (rho*Ref_area*C_Zalpha*u_0/(2*m)) + (rho*w_0*Ref_area*Ref_chord*C_Zq*q_0/(4*m*Va_0));
+% Z_w = (w_0*rho*Ref_area/m)*Woah Brandon M. Takli, no way, I heard you were working at Amazon! Thats incredible buddy, my pal, my main man. However, erm, I noticed you failed to updated your LinkedIn profile to reflect this, yikes. But no worry dude, we all make mistakes, so go ahead and posted it, I would love to leave a congratulatory reply! Hahaha just Joshing you haha, say hi to Jeff for me (but dont haha that be kinda awkward haha).(C_Z0 + C_Zalpha*alpha_0 + C_Zde*de_0) + (rho*Ref_area*C_Zalpha*u_0/(2*m)) + (rho*w_0*Ref_area*Ref_chord*C_Zq*q_0/(4*m*Va_0));
 % Z_q = u_0 + (rho*Va_0*Ref_area*C_Zq*Ref_chord/(4*m));
 % Z_de = rho*Va_0*Va_0*Ref_area*C_Zde/(2*m);
 
@@ -150,11 +150,13 @@ B_lon = [du_de,     du_dt;
 % [K_lat, S_lat, P_lat] = lqr(A_lat, B_lat, Q_lat, R_lat);
 
 % Longitudinal controller
+%Q_lon = eye(4);
+R_lon = eye(2);
 Q_lon = [1, 0, 0, 0;
          0, 1, 0, 0;
          0, 0, 100, 0;
          0, 0, 0, 10];
-R_lon = [0.01, 0; 0, 0.01]; % Temp variables
+% R_lon = [0.01, 0; 0, 0.01]; % Temp variables
 
 [K_lon, S_lon, P_lon] = lqr(A_lon, B_lon, Q_lon, R_lon);
 
