@@ -132,6 +132,10 @@ B_lon = [du_de,     du_dt;
          dq_de,     0;
          0,         0]
 
+C_lon = eye(4);
+
+D_lon = zeros(4,2);
+
 
 % [num, den] = ss2tf(A_lon, B_lon, eye(4), zeros(4,2),1);
 % tf_u_de = tf(num(1,:), den);
