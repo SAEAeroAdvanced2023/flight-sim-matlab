@@ -10,9 +10,9 @@ run("pada_aero_coefficients.m");
 % ---------------------------------
 % Trim conditions for linearization
 % ---------------------------------
-u_0 = 10.0; % Velocity in body x-axis
+u_0 = 15.0; % Velocity in body x-axis
 v_0 = 0; % Velocity in body y-axis
-w_0 = 1.0; % Velocity in body z-axis
+w_0 = 0; % Velocity in body z-axis
 Va_0 = sqrt(u_0^2 + w_0^2 + v_0^2); % Airspeed 40ft/s 50up200side
 
 p_0 = 0; % Angular velocity in x-axis
